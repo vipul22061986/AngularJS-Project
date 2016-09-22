@@ -1,0 +1,1069 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>IsWeTing</title>
+		<link rel="stylesheet" href="css/isweting.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css" />
+       <!-- <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />  -->
+        <link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+       <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+       <script src="email_composer.js"></script>
+       <script type="text/javascript" src="js/html5gallery.js"></script>
+       <script type="application/javascript" src="js/fastclick.js"></script>
+       <script type="application/javascript" src="js/Toast.js"></script>
+       
+      
+        <script src="js/credentials.js"></script>
+        <script src="js/eventlisting.js"></script>
+        <script src="js/eventdetails.js"></script>
+   
+        <script src="js/restaurant.js"></script>
+        <script src="js/restaurant_detail.js"></script>
+       
+       <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+       <script src="js/maps.js"></script>
+        
+   	    <script type="text/javascript" charset="utf-8" src="js/advertisement.js"></script>
+
+
+<!-- Rating Js & css -->
+<!--// plugin-specific resources //-->
+<script src='js/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+<script src='js/jquery.rating.js' type="text/javascript" language="javascript"></script>
+<link href='css/jquery.rating.css' type="text/css" rel="stylesheet"/>
+
+
+
+  <!-- facebook js sdk -->
+       <script src="cdv-plugin-fb-connect.js"></script>
+  		<script src="facebook-js-sdk.js"></script> 
+    <!-- Twitter JS -->
+    <script type="text/javascript" charset="utf-8" src="childbrowser.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jsOAuth-1.3.6.js"></script>
+    <script src="js/twittercode.js"></script>
+    
+
+    
+        <!-- Push Notification JS --->
+        <script type="text/javascript" charset="utf-8" src="js/PushNotification.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/pushnotificationcode.js"></script>
+        <script type="text/javascript" charset="utf-8">
+			var devicetoken="";
+			var key='';
+			var access_token='';
+			var userID='';
+			var latitude="40.67060762911966";
+            var longitude="-73.91160046109124";
+            var AdData;
+            var Data_from='';
+			var id='';
+			var star = '';
+            var MapData=[];
+            
+            
+            window.addEventListener('load', function () {
+                                  new FastClick(document.body);
+                                      navigator.splashscreen.hide();
+                                    onDeviceReadyLocation();
+                                    }, false);
+                                    
+$(document).bind('pageinit', function () {
+				  $.mobile.defaultPageTransition = 'none';
+                  $.mobile.toolbar.prototype.options.tapToggle = false;
+                 // FastClick.attach(document.body);
+}); // pageinit end here
+$(document).on("pageshow", "#videos", function () {
+               setTimeout(function(){
+                          $(this).trigger('resize');
+                          },50);
+               }); // page show end here
+$(document).on("pageshow", "#myting", function () {
+                              setTimeout(function(){
+                                         $(this).trigger('resize');
+                                         },50);
+ }); // page show end here
+                              
+$(document).on("pageshow", "#map", function () {
+                              setTimeout(function(){
+                                         $(this).trigger('resize');
+                                         },50);
+}); // page show end here
+$(document).on("pageshow", "#event_map", function () {
+               setTimeout(function(){
+                          $(this).trigger('resize');
+                          },50);
+               }); // page show end here
+$(document).on("pageshow", "#myting_map", function () {
+                setTimeout(function(){
+                              $(this).trigger('resize');
+                              },50);
+             }); // page show end here
+$(document).on("pageshow", "#login", function () {
+              
+							if (JSON.parse(window.localStorage.getItem('session'))!=null)
+							{	
+									$.mobile.changePage("#home", {changeHash: false });
+							}
+});  // login page show end here
+$(document).on("pageshow", "#home", function () {
+               MapData=[];
+               $(".restaurant_list ul").html('');
+               $(".event_list ul").html('');
+               $("#listing .loadmore").hide();
+               
+               $("#suggestions_rest").html("");
+               $("#searchField_rest").val();
+               $("#suggestions").html("");
+               $("#searchField").val();
+}); // home page show end here
+$('#map').on('pageshow', function(){
+                        google.maps.event.trigger(map_div, "resize");
+                    }); // map page show
+  
+function onDeviceReadyLocation() {
+    FB.init({
+            appId:'1408126749471224', // CLIENT FB ID
+            // appId: '1464633840433241', // OUR TEST ACCOUNT ID
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false
+            });
+navigator.geolocation.getCurrentPosition(onSuccessLocation, onErrorLocation);
+  
+}
+function onSuccessLocation(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+  //  alert("--->"+position.coords.latitude+"==="+position.coords.longitude);
+    
+}
+        
+function onErrorLocation(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
+    
+function facebooklogin()
+{
+                
+    FB.getLoginStatus(handleStatusChange);
+    authUser();
+    updateAuthElements();	
+    promptLogin();
+} // facebooklogin end
+		   
+           // onSuccess Geolocation
+
+		</script>
+
+	</head>
+	<body>
+    
+    		        <!--  Login page --->
+		<div data-role="page" data-theme="a" id="login" class="login">
+        	<div data-role="content" data-theme="a" class="content_login">
+                
+                  
+            	<div class="logo">
+                <img src="images/logo.png">
+                </div>
+            	<div class="login_details">
+            		<div class="login_content">Thank you for downloading this app. Is We Ting is a unique mobile app that will appeal to and gratify those with an interest in Caribbean food, music and festivities. Please sign in and enjoy.</div>
+                    <div class="facebook"><a onclick="facebooklogin();"><img src="images/facebook.png"></a></div>
+                    <div class="twitter"><a onclick="Twitter.init();"><img src="images/twitter_img.png"></a></div>
+                    <div class="local_login">
+                    	<div class="sign_up"><a href="#sign_up"><img src="images/signup.png"></a></div>
+                    	<div class="sign_in"><a href="#sign_in"><img src="images/signin.png"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+        </div> 
+        			<!------ login page end --->
+                    
+              <!-- sign in page started --->
+        
+        <div data-role="page" data-theme="a" id="sign_in" class="sign_in">
+			<div data-role="header" data-position="fixed" class="heading">
+            	<div class="left_arrow"><a href="#login"></a></div>
+                <div class="center_text">Sign in</div>
+                <div class="right_home"><a href="#login"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_home localsignin">
+            	<div class="logo">
+                <img src="images/logo.png">
+                </div>
+                <div class="location_box">
+                	<div class="login_details signin">
+                	<div class="credentials">
+                    	<div class="email"><input id="vEmail" type="text" placeholder="Email Address"/></div>
+                        <div class="password"><input id="vPassword" type="password" placeholder="Password"/></div>
+                    </div>
+                    <div class="sign_in local_signin" id="signin"><a href="#"><img src="images/signin.png"></a></div>
+                   
+                    <div class="forgot"><a href="#forgotpassword">Forgot Password?</a></div>
+                	</div>
+                </div>
+            </div>
+             <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+        </div>       
+              
+              <!-- sign in page ended --->      
+            
+               <!-- sign up page started --->
+        
+        <div data-role="page" data-theme="a" id="sign_up" class="sign_up">
+			<div data-role="header" data-position="fixed" class="heading">
+            	<div class="left_arrow"><a href="#login"></a></div>
+                <div class="center_text">Sign Up</div>
+                <div class="right_home"><a href="#login"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_home localsignin">
+            	<div class="logo">
+                <img src="images/logo.png">
+                </div>
+                <div class="location_box">
+                	<div class="login_details signup">
+                	<div class="credentials">
+                    	<div class="name"><input id="name" type="text" placeholder="Name"/></div>
+                        <div class="email"><input id="email" type="text" placeholder="Email"/></div>
+                        <div class="password"><input id="password" type="password" placeholder="Password"/></div>
+                        <div class="confirm_password"><input id="confirm_password" type="password" placeholder="Confirm Password"/></div>
+                    </div>
+                    <div class="local_signup" id="signup"><a><img src="images/signup.png"></a></div>
+                	</div>
+                </div>
+            </div>
+             <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+        </div>       
+              
+              <!-- sign up page ended --->  
+            
+              <!-- home page started --->
+		<div data-role="page" data-theme="a" id="home" class="home">
+			<div data-role="header" data-position="fixed" class="heading">
+               <div class="left_changepass" ><a href="#changepassword"></a></div>
+              <div class="center_text">Is We Ting</div>
+                <div class="right_logout" ><a onclick="logoutuser()"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_home">
+            <div class="box">
+            	<div class="column1">
+                	<div class="restaurant"><a href="#location"></a></div>
+                    <div class="events"><a href="#event_location"></a></div>
+                </div>
+                <div class="column2">
+                	<div class="videos"><a href="#videos"></a></div>
+                    <div class="favourites"><a href="#favourites"></a></div>
+                </div>
+                <div class="column3">
+                	<div class="facebook_home"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.facebook.com/isweting',
+                        { showLocationBar: true });"></a></div>
+                    <div class="twitter_home"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.twitter.com/isweting',
+                        { showLocationBar: true });"></a></div>
+                </div>
+            </div>
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- home page send ----->
+    	<!-- location page started --->
+		<div data-role="page" data-theme="a" id="location" class="location">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#home"></a></div>
+                <div class="center_text">Choose Location</div>
+                <div class="right_home"><a href="#home"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_location">
+            	<div class="location_box">
+                	<div class="nearby">
+                    	<button id="nearby">Nearby</button>
+                    </div>
+                    <div class="or"> </div>
+                    <div class="autotext">
+                        <input type="text" id="searchField_rest" placeholder="Search City..">
+                        <ul id="suggestions_rest" data-role="listview" data-inset="true"></ul>
+                  </div>
+                </div>
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- location page end ----->
+        <!-- Event location page started --->
+		<div data-role="page" data-theme="a" id="event_location" class="location">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#home"></a></div>
+                <div class="center_text">Choose Location</div>
+                <div class="right_home"><a href="#home"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_location">
+            	<div class="location_box">
+                	<div class="nearby">
+                    	<button id="nearbyevent">Nearby</button>
+                    </div>
+                    <div class="or"> </div>
+                    <div class="autotext">
+                        <input type="text" id="searchField" placeholder="Search City..">
+                       <ul id="suggestions" data-role="listview" data-inset="true"></ul>
+                    </div>
+                </div>
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- Event location page end ----->
+        
+        <!-- select favourites page started --->
+        <div data-role="page" data-theme="a" id="favourites" class="location">
+            <div data-role="header" data-position="fixed" class="heading">
+                <div class="left_arrow"><a href="#home"></a></div>
+                <div class="center_text">My Tings</div>
+                <div class="right_home"><a href="#home"></a></div>
+            </div>
+            <div data-role="content" data-theme="a" class="content_location">
+                <div class="location_box">
+                    <div class="nearby fav_restaurant">
+                        <button id="nearby" onclick="document.location='#myting';">Restaurant</button>
+                    </div>
+                    <div class="or"> </div>
+                    <div class="nearby fav_events">
+                        <button id="favouriteEvents" onclick="document.location='#myting';">Events</button>
+                    </div>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+                <a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a>
+                    </div>
+        </div>
+        <!---------- select favourites page end ----->
+        
+		<!-- Restaurant listing page started --->
+		<div data-role="page" data-theme="a" id="listing" class="listing">
+			<div data-role="header" data-position="fixed" class="heading">
+                
+                <div class="left_arrow"><a href="#home"></a></div>
+                
+				<div class="left_search"><a href="#listing_panel"></a></div>
+                <div class="right_location"><a></a></div>
+                   <div class="center_text">Food Tings</div>
+			</div>
+            <div data-role="panel" data-display="push" data-theme="b" id="listing_panel" data-position="right">
+                <div class="filters" data-position="fixed"><a href="#">Filters</a></div>
+                <div class="price">
+                    <form>
+                        <fieldset data-role="controlgroup" data-type="horizontal" class="distance_group">
+                            <legend>Distance</legend>
+                            
+                                <input name="chk_distance" id="defalut" type="radio" checked="checked" value="3">
+                                <label for="defalut">3 Km</label>
+                            
+                                <input name="chk_distance" id="km_small" type="radio" value="1.5">
+                                <label for="km_small">1.5 Km</label>
+                              
+                                <input name="chk_distance" id="km_large" type="radio" value="8">
+                                <label for="km_large">8 Km</label>
+                              
+                                <input name="chk_distance" id="km_extralarge" type="radio" value="20">
+                                <label for="km_extralarge">20 Km</label>
+                                            </fieldset>
+                    </form>
+                     <div class="filterbutton"><a onClick="distanceFilter();">Filter</a></div>
+                </div>
+                
+            </div><!-- /panel -->
+			<div data-role="content" data-theme="a" class="list">
+            	<div class="restaurant_list">
+                	<ul>
+                    	<!--
+                        <li class="second">
+                        	<div class="li_img">
+                            	<img src="images/hotel1.png">
+                            </div>
+                            <div class="rest_details">
+                            	<h2>Paulie's Pizza</h2>
+                            	<p>Desserts, Tea Rooms, Breakfast & Brunch Dame Street, Cork Hill, Dublin 2</p>
+                            </div>
+                            <div class="ratings">
+                            	<div class="stars"><img src="images/stars.png"></div>
+                                <div class="text">73 reviews</div>
+                            </div>
+                        </li> -->
+                    </ul>
+                 
+                </div>
+                  <div class="loadmore"><a>View More...</a> </div>
+			</div>
+    
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer masterfooter">
+                    <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+                   
+
+			</div>
+		</div>
+        <!---------- Restaurant listing page end ----->
+        
+        
+        <!-- Event listing page started --->
+		<div data-role="page" data-theme="a" id="event_listing" class="event_listing">
+			<div data-role="header" data-position="fixed" class="heading">
+                <div class="left_arrow"><a href="#home"></a></div>
+				<div class="left_search"><a href="#event_listing_panel"></a></div>
+                  <div class="right_location"><a></a></div>
+                <div class="center_text">Event List</div>
+              
+               
+			</div>
+            
+            <div data-role="panel" data-display="push" data-theme="b" id="event_listing_panel" data-position="right">
+            	<div class="filters"><a href="#">Filter Events</a></div>
+               	 <div class="filtertags">
+                   <div class="most_popular">
+                        <form>
+                            <div class="ui-field-contain">
+                                <label for="indoor_select">Indoor</label>
+                                <select name="indoor_select" id="indoor_select" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="border"></div>
+                   </div>
+                   <div class="most_popular">
+                        <form>
+                            <div class="ui-field-contain">
+                                <label for="outdoor_select">Outdoor</label>
+                                <select name="outdoor_select" id="outdoor_select" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="border"></div>
+                   </div>
+                   <div class="most_popular">
+                        <form>
+                            <div class="ui-field-contain">
+                                <label for="cc_select">Accept Credit Cards</label>
+                                <select name="cc_select" id="cc_select" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="border"></div>
+                   </div>
+                   <div class="most_popular">
+                        <form>
+                            <div class="ui-field-contain">
+                                <label for="perfor_select">Live Performance</label>
+                                <select name="perfor_select" id="perfor_select" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="border"></div>
+                   </div>
+                   <div class="most_popular">
+                        <form>
+                            <div class="ui-field-contain">
+                                <label for="dj_select">Dj Only</label>
+                                <select name="dj_select" id="dj_select" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </div>
+                        </form>
+                   </div> 
+                </div> 
+                <div class="filterbutton"><a onClick="filter_resturant();">Filter</a></div>
+    </div><!-- /panel -->
+    
+			<div data-role="content" data-theme="a" class="list">
+            	<div class="restaurant_list event_list">
+                	<ul>
+                    	<!--<li class="first">
+                        	<div class="li_img">
+                            	<img src="images/event1.png">
+                            </div>
+                            <div class="rest_details event_details">
+                            	<h2>Dance Party</h2>
+                            	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </li>
+                        <li class="first">
+                        	<div class="li_img">
+                            	<img src="images/event1.png">
+                            </div>
+                            <div class="rest_details event_details">
+                            	<h2>Engagement</h2>
+                            	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+                 <div class="loadmore"><a>View More...</a> </div>
+			</div>
+    
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- Event listing page end ----->
+
+        <!-- My Ting page started --->
+		<div data-role="page" data-theme="a" id="myting" class="myting listing">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#favourites"></a></div>
+                <div class="center_text">My Ting List</div>
+                <div class="right_location"><a></a></div>
+			</div>
+                <div data-role="panel" data-display="push" data-theme="b" id="myting_panel">
+            	<div class="filters"><a href="#">Filters</a></div>
+                <div class="price">
+                    <form>
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <legend>Price</legend>
+                            <input name="checkbox-h-2a" id="checkbox-h-2a" type="checkbox">
+                            <label for="checkbox-h-2a">&nbsp;&nbsp;&nbsp;$</label>
+                            <input name="checkbox-h-2b" id="checkbox-h-2b" type="checkbox">
+                            <label for="checkbox-h-2b">&nbsp;&nbsp;$$</label>
+                            <input name="checkbox-h-2c" id="checkbox-h-2c" type="checkbox">
+                            <label for="checkbox-h-2c">&nbsp;$$$</label>
+                            <input name="checkbox-h-2d" id="checkbox-h-2d" type="checkbox">
+                            <label for="checkbox-h-2d">$$$$</label>
+                        </fieldset>
+                   </form>
+                   <div class="border"></div>
+               </div>
+               <div class="most_popular">
+               		<form>
+                    	<legend>Most Popular</legend>
+                        <div class="ui-field-contain">
+                            <label for="flip-6">Open Now<div class="time">10:10 AM</div></label>
+                            <select name="flip-6" id="flip-6" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+                <div class="most_popular delivery">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-7">Delivery</label>
+                            <select name="flip-7" id="flip-7" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular deal">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-8">Offering a Deal</label>
+                            <select name="flip-8" id="flip-8" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               
+               <div class="best_match dropdown">
+               	<legend>Sort By</legend>
+                <select class="selectpicker">
+                    <option>Best Match</option>
+                    <option>Dallas</option>
+                    <option>New York</option>
+                 </select>
+                 <div class="border"></div>
+               </div>
+               
+               <div class="most_popular general_features">
+               		<form>
+                    	<legend>General Features</legend>
+                        <div class="ui-field-contain">
+                            <label for="flip-9">Take out</label>
+                            <select name="flip-9" id="flip-9" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular take_reservation">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-11">Take Reservation</label>
+                            <select name="flip-11" id="flip-11" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular credit_card">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-12">Accepts Credit Cards</label>
+                            <select name="flip-12" id="flip-12" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular happy_hours">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-13">Happy Hours</label>
+                            <select name="flip-13" id="flip-13" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular free_wifi">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-14">Free Wi-Fi</label>
+                            <select name="flip-14" id="flip-14" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="border"></div>
+               </div>
+               <div class="most_popular paid_wifi">
+               		<form>
+                        <div class="ui-field-contain">
+                            <label for="flip-15">Paid Wi-Fi</label>
+                            <select name="flip-15" id="flip-15" data-role="slider">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                            </select>
+                        </div>
+                    </form>
+               </div>
+    </div><!-- /panel -->
+    
+    		<div data-role="content" data-theme="a" class="list">
+            	<div class="restaurant_list">
+                	<ul>
+                    	<!--<li class="first">
+                        	<div class="li_img">
+                            	<img src="images/hotel1.png">
+                            </div>
+                            <div class="rest_details">
+                            	<h2>Queen of Tarts</h2>
+                            	<p>Desserts, Tea Rooms, Breakfast &npsp; Brunch Dame Street, Cork Hill, Dublin 2</p>
+                            </div>
+                            <div class="ratings">
+                            	<div class="stars"><img src="images/stars.png"></div>
+                                <div class="text">73 reviews</div>
+                            </div>
+                        </li>
+                        --->
+                    </ul>
+                </div>
+			</div>
+    
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- My Ting page end ----->
+        
+        
+        <!-- details page started --->
+		<div data-role="page" data-theme="a" id="details" class="details">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#listing"></a></div>
+                <div class="center_text">Queen of Tarts</div>
+                <div class="right_home"><a href="#home"></a></div>
+			</div>
+           
+			<div data-role="content" data-theme="a" class="detail_content">
+            	<div class="detail_img">
+                	<img src="images/detail_img.jpg">
+                    <div class="address">
+                        <div class="detail_address">
+                            <h2>Queen of Tarts </h2>	
+                            <p>Desserts, Tea Rooms, Breakfast &npsp; Brunch Dame Street, Cork Hill, Dublin 2</p>
+                            <p>Time: 10:00 AM - 10:00 PM</p>
+                        </div>
+                        <div class="detail_ratings">
+                            <div class="stars"><img src="images/stars.png"></div>
+                            <div class="text">73 reviews</div>
+                            <div class="status">Open</div>
+                        </div>
+                    </div>
+                </div>
+                    
+                 
+                <div class="options">
+                	<div class="review"></div>
+                    <div class="directions"></div>
+                    <div class="call"></div>
+                    <div class="reservation"></div>
+                </div>
+                
+                <div class="about">
+                	<h2> About Queen of Tarts</h2>
+                    <p> The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33...</p>
+                    <img src="images/border_bottom.png">
+                </div>
+                
+                <div class="reviews">
+                	<h2> Reviews </h2>
+                	<ul>
+                    	<li>
+                        	<div class="li_name">
+								<div> Evelyn W.</div>
+                            </div>
+                            <div class="detailed_review">
+                                <div class="li_details">
+                                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested....</p>
+                                </div>
+                                <div class="ratings detail_stars">
+                                    <div class="stars"><img src="images/detail_stars.png"></div>
+                                </div>
+                                <img src="images/border_bottom.png">
+                            </div>
+                        </li>
+                        
+                        <li>
+                        	<div class="li_name">
+								<div> Evelyn W.</div>
+                            </div>
+                            <div class="detailed_review">
+                                <div class="li_details">
+                                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested....</p>
+                                </div>
+                                <div class="ratings detail_stars">
+                                    <div class="stars"><img src="images/detail_stars.png"></div>
+                                </div>
+                                <img src="images/border_bottom.png">
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="more">
+                    </div>
+                </div>
+                    
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer masterfooter">
+                <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+              
+			</div>
+		</div>
+        <!---------- details page end ----->
+        
+        
+        <!-- Event details page started --->
+		<div data-role="page" data-theme="a" id="event_details" class="event_details">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#event_listing"></a></div>
+                <div class="center_text">Event Details</div>
+                <div class="right_home"><a href="#home"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="detail_content">
+                <div class="detail_img">
+                	<img src="images/event_big.png">
+                </div>  
+                <div class="options">
+                	<div class=""><img src="images/event_4.png"></div>
+                   <div class=""><img src="images/event_3.png"></div>
+                   <div class=""><img src="images/event_2.png"></div>
+                    <div class=""><img src="images/event_1.png"></div>
+                </div>
+                
+                <div class="about">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled ...</p> 
+                    
+                </div>
+                
+                <div class="eventdetails">
+                	<div class="icon">
+                    </div>
+                    <div class="venue">
+                    <div class="event_address">302 Park Resort Atlanta, GA 30317 United States</div>
+                    <div class="event_date">20 March 2014,(At 7PM)</div>
+                    <div class="phone_no">+44 123 456 7891</div>
+                    <div class="event_email">company@gmail.com</div>
+                    <div class="website">www.lipsum.com</div>
+                    </div>
+                </div>
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+        <!---------- Event details page end ----->
+        
+        
+      
+        
+        
+         <!---------- videos page end ----->
+         <div data-role="page" data-theme="a" id="videos" class="videos">
+			<div data-role="header" data-position="fixed" class="heading">
+				<div class="left_arrow"><a href="#home"></a></div>
+                <div class="center_text">Music Videos</div>
+               <div class="right_home"><a href="#home"></a></div>
+			</div>
+			<div data-role="content" data-theme="a" class="content_videos">
+            	
+                 <div style="display:none;margin:0 auto;" class="html5gallery" data-skin="gallery" data-youtubechannel='{ "author": "UCkSO7rylzW3EL_zu9x0VXWw", "start-index": 1, "max-results": 30, "orderby": "published" }' data-showtitle="false" data-resizemode="fill" data-autoplayvideo="false" data-html5player=true data-responsive="true" data-width="400" data-height="225" data-showsocialmedia="false"></div>
+                 
+                <div class="video_main">
+                <!--	<img onclick="window.plugins.ChildBrowser.showWebPage('http://www.youtube.com/watch?v=zUxfgSdYNN4&list=PLugvHp1xdboN1c-l-j_dPq-54X1euMMRu',
+                        { showLocationBar: true });" src="images/video_main.png"> -->
+               
+                
+                </div>
+                
+                <div class="about_video">
+                	<h2>About We Music</h2>
+                    <p>The music videos shown here are from a playlist of all Is We Ting's favorite Caribbean hits. It comprises of some of the hits and not so popular songs from the different Caribbean islands. It contains a range of genres; reggae, dancehall, soca, kompa, reggaeton, zouk and more, all for you to enjoy. We at Is We Ting are always looking to hear about new Caribbean music and artists so please reach out to us and let us know. We would love to include some of your favorites in this playlist as well. </p>
+                    <p>Here are the various ways you can get on to us.</p>
+                    <p>Email - info@isweting.com</p>
+                    <p>Follow us on Instagram - @IsWeTing</p>
+                    <p>Follow us on Twitter - @IsWeTing</p>
+                    <p>Like us on Facebook - www.facebook.com/IsWeTing</p>
+                    <p>Visit us at www.isweting.com</p>
+                    
+                	<img src="images/border_bottom.png">
+                </div>
+            
+            
+			</div>
+            <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            	<div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+			</div>
+		</div>
+
+<!-------  Map page started -------------->
+<div data-role="page" data-theme="a" id="map" class="map">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#listing"></a></div>
+        <div class="center_text">Map</div>
+        
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos mapcontent">
+        <div id="map_div" class="map_div"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+    </div>
+</div>
+
+<!-------  Map page ended   ---------->
+<!-------  Map page started for event-------------->
+<div data-role="page" data-theme="a" id="event_map" class="map">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#event_listing"></a></div>
+        <div class="center_text">Map</div>
+        
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos mapcontent">
+        <div id="map_div_event" class="map_div"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+    </div>
+</div>
+
+<!-------  Map page ended   ---------->
+<!-------  Map page started for event-------------->
+<div data-role="page" data-theme="a" id="myting_map" class="map">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#myting"></a></div>
+        <div class="center_text">Map</div>
+        
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos mapcontent">
+        <div id="map_div_myting" class="map_div"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+    </div>
+</div>
+
+<!-------  Map page ended   ---------->
+
+<!------- Directions Map page started -------------->
+<div data-role="page" data-theme="a" id="maps_direction" class="map">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#details"></a></div>
+        <div class="center_text">Directions</div>
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos">
+        <div id="from_to">&nbsp;</div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a>
+            </div>
+</div>
+
+<!------- Directions Map page ended   ---------->
+
+<!---------  add review ---------->
+
+<div data-role="page" data-theme="a" id="reviews_ratings" class="map">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#details"></a></div>
+        <div class="center_text">Reviews and Ratings</div>
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos">
+        
+        <div id="tab-Testing">
+          
+                <div class="starcheck">
+                    <input class="star required" type="radio" name="test-1-rating-5" value="1"/>
+                    <input class="star" type="radio" name="test-1-rating-5" value="2"/>
+                    <input class="star" type="radio" name="test-1-rating-5" value="3"/>
+                    <input class="star" type="radio" name="test-1-rating-5" value="4"/>
+                    <input class="star" type="radio" name="test-1-rating-5" value="5"/>
+                </div>
+                <div class="add_reviews">
+                    <textarea id="review" placeholder="Add your reviews" rows="4" style="width:100%;"></textarea>
+                </div>
+                <div class="post_reviews">
+                    <div class="post"><a onClick="postreview()">Post</a></div>
+                    <div class="cancel"><a href="#details">Cancel</a></div>
+                </div>
+                <div class="test Smaller">
+                </div>
+          
+        </div>
+        
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+            <div class="subdiv"><img src="images/addver.png"></div>
+	</div>
+</div>
+<div data-role="page" data-theme="a" id="reviews_listing" class="location">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#details"></a></div>
+        <div class="right_home"><a href="#home"></a></div>
+        <div class="center_text">Restaurant Reviews</div>
+    </div>
+    <div data-role="content" data-theme="a" class="content_videos">
+        <div class="reviews">
+          <ul>
+              <li>
+                  <div class="li_name">
+                      <div>Miriam H.</div>
+                  </div>
+                  <div class="detailed_review">
+                      <div class="li_details">
+                          <p>My two stars are based on service alone. The food was solid, though not particularly creative in the current food culture (no doubt it was remarkable when...</p>
+                      </div>
+                      <div class="ratings detail_stars">
+                          <div class="stars">
+                              <img src="http://isweting.com/restaurant/admin/star_images/2-star.png">
+                          </div>
+                      </div>
+                      <img src="images/border_bottom.png">
+                  </div>
+              </li>
+          </ul>
+        </div>
+    </div> <!-- Content End -->
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+	</div>
+</div>
+<!-- PAge End Resturant Review -->
+<!---------- Forgot Password page start ----->
+<div data-role="page" data-theme="a" id="forgotpassword" class="location">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#login"></a></div>
+        <div class="center_text">Forgot Password</div>
+       
+    </div>
+    <div data-role="content" data-theme="a" class="content_location">
+        <div class="location_box">
+           
+          
+                    <input type="text" class="forgot_email" id="forgot_email" placeholder="Enter Email Address..">
+                    <div class="sumbitpass nearby">
+                        <button class="" id="sumbitbutton">Submit</button>
+                    </div>
+          
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+    </div>
+</div>
+<!---------- Forgot Password page end ----->
+
+<!---------- change Password page start ----->
+<div data-role="page" data-theme="a" id="changepassword" class="location">
+    <div data-role="header" data-position="fixed" class="heading">
+        <div class="left_arrow"><a href="#home"></a></div>
+        <div class="center_text">Change Password</div>
+        <div class="right_home"><a href="#home"></a></div>
+    </div>
+    <div data-role="content" data-theme="a" class="content_location">
+        <div class="location_box">
+            
+            
+           <div class="input"> <input type="password" class="forgot_email" id="change_password_email" placeholder="Enter Password.."></div>
+            <div class="input"> <input type="password" class="forgot_email" id="change_password_email_verify" placeholder="Retype Password.."></div>
+                <div class="sumbitpass nearby">
+                    <button class="" onclick="changePassword();">Reset Password</button>
+                </div>
+                
+                </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="a" class="footer">
+        <div class="subdiv"><a onclick="window.plugins.ChildBrowser.showWebPage('http://www.davenuebrooklyn.com',{ showLocationBar: true });"><img src="images/advertisement.png"></a></div>
+    </div>
+</div>
+<!---------- change Password page end ----->
+
+
+  <!--<script src="js/_config.js"></script>-->
+  <script src="js/fbjs/ui.js"></script>
+  <script src="js/fbjs/auth.js"></script>
+  <script src="js/fbjs/feed.js"></script>
+  <script src="js/fbjs/graph_api.js"></script>
+  <script src="js/fbjs/requests.js"></script>
+  <!--<script src="js/credits.js"></script>-->
+
+ 
+          <!---------- videos page end ----->
+	</body>
+</html>

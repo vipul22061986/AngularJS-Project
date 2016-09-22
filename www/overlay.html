@@ -1,0 +1,30 @@
+<div content-for="title">
+  <span>Overlays</span>
+</div>
+
+
+<div class="scrollable">
+ <div class="scrollable-content">
+ </div>
+</div>
+
+<div overlay="overlay1" default="active">
+  <h4 class="overlay-title">Remote app</h4>    
+  <p>
+   Will help you to connect any industry of your choice are you interested with Food &nbsp; Beverages ?
+  </p>
+  <p toggle="off" bubble target="overlay1">
+  <span class="btn-primary"><a ng-click="select_store_type(0)" class="greenbutton" href="#/choose_shop">No</a></span>
+  <span class="btn-default"><a ng-click="select_store_type(1)" class="orangebutton" href="#/home">Yes</a></span>
+  </p>
+</div>
+<div class="hide" overlay="storetype">
+  <h4 class="overlay-title">Second Overlay</h4>    
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, ex eaque possimus ipsa ab quasi quos corporis consequatur laudantium? Ab assumenda delectus quo velit voluptates doloribus. Earum odit facilis qui.
+  </p>
+  <p toggle="off" bubble target="overlay2">
+  <span class=" btn-primary"><a ng-click="select_store_type(0)" class="greenbutton" href="#/choose_shop">No</a></span>
+  <span class=" btn-default"><a ng-click="select_store_type(1)" class="orangebutton" href="#/home">Yes</a></span>
+  </p>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Remote App</title>
+  	<link rel="shortcut icon" href="../favicon.png" type="image/x-icon" />
+<!--    <link rel="stylesheet" href="../dist/css/mobile-angular-ui-base.min.css" />
+-->    
+	<link rel="stylesheet" href="css/mobile-angular-ui-base.min.css">
+    <link rel="stylesheet" href="dist/css/mobile-angular-ui-desktop.min.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/app.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+   	<script src="cordova.js"></script>
+	<script src="js/jquery.js"></script>    
+<!--    <script src="js/fastclick.js"></script>-->
+	<script src="js/angular.min.js"></script>
+    <script src="angular-route.min.js"></script>
+    <script src="angular-touch.min.js"></script>
+    <script src="dist/js/mobile-angular-ui.min.js"></script>
+    <script src="demo.js"></script>
+
+</head>
+
+  <body ng-app="MobileAngularUiExamples" ng-controller="MainController">
+    
+    <!-- Sidebars -->
+    <div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" ></div>
+
+    <div ng-include="'sidebarRight.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar"></div>
+
+    <div class="app">
+
+      <!-- Navbars -->
+
+     
+      
+      <!-- App Body -->
+      <div class="app-body" ng-class="{loading: loading}">
+        <div ng-show="loading" class="app-content-loading">
+          <i class="fa fa-spinner fa-spin loading-spinner"></i>
+        </div>
+
+        <ng-view class="app-content" ng-hide="loading"></ng-view>
+      </div>
+
+    </div><!-- ~ .app -->
+  </body>
+</html>

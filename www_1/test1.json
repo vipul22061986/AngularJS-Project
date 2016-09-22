@@ -1,0 +1,26 @@
+{
+
+    "data": [
+        {
+            "id": "17",
+            "name": "Drasty",
+            "address": "suburbD,abc,1001"
+        },
+        {
+            "id": "18",
+            "name": "Store1",
+            "address": "suburbD,1003"
+        },
+        {
+            "id": "19",
+            "name": "Store2",
+            "address": "suburbD,1002"
+        },
+        {
+            "id": "20",
+            "name": "Store3",
+            "address": "suburbD,1004"
+        }
+    ]
+
+}

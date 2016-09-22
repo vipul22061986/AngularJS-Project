@@ -1,0 +1,43 @@
+<div class="navbar navbar-app navbar-absolute-top app_header" ng-controller="StoreController">
+    <div class="navbar-brand navbar-brand-center app_title" >
+        <h3>F & B Only</h3>
+        <p class="custom_msg">current suburbd/postcode</p>
+    </div>
+    <div class="btn-group pull-left">
+        <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle menu">
+            <a><i class="fa fa-bars"></i></a>
+        </div>
+      
+      
+    </div>
+    
+    <div class="btn-group pull-right" >
+        <div class="btn btn-navbar settings">
+            <a ng-click="search_go();" ng-controller="GO_Search"><i class="fa fa-map-marker"></i></a>
+        </div>
+    </div>
+    <div class="heading_suburb">
+        <input id="product_name" class="product_name_btn" type="text" placeholder="Suburbd/Postcode">
+        <a ng-click="find_store_byname()" class="searchbutton">Find</a>
+    </div>
+</div>
+<div class="scrollable" >
+    <div class="scrollable-content container-fluid section remoteStores">
+        <div class="tab-content storestag">
+            <div class="tab-pane"
+                toggleable
+                active-class="active"
+                default="active"
+                id="Tab"
+                exclusion-group="myTabs" ng-controller="CategoryController">
+			  <div class="list-group list_group_products" toggle="off" bubble target="mainSidebar" id="list_stores">
+            </div>
+            </div><!-- List group end -->
+     	</div><!-- Tab end -->
+        
+        
+    </div>
+</div>
+
+
+<!-- Sidebars -->

@@ -1,0 +1,47 @@
+   <div class="navbar navbar-app navbar-absolute-top app_header">
+        <div class="navbar-brand navbar-brand-center app_title" >
+          <span>Choose Shop</span>
+        </div>
+        <div class="btn-group pull-left">
+          <div class="btn btn-navbar sidebar-toggle menu">
+            <a href="#"><i class="fa fa-bars"></i></a> 
+          </div>
+        </div>
+        
+        <div class="btn-group pull-right" >
+              <div class="btn btn-navbar settings">
+                <i class="fa fa-gear"></i> 
+              </div>
+        </div>
+ </div>
+ <div class="scrollable ">
+ <div class="scrollable-content container-fluid section gray">
+	  
+   
+      <div class="tab-content remote_stores">
+        <div class="tab-pane" 
+            toggleable 
+            active-class="active" 
+            default="active" 
+            id="Tab1" 
+            exclusion-group="myTabs" ng-controller="ShopController">
+                      <div class="list-group list_group_products" toggle="off" bubble target="mainSidebar" id="list_stores" ng-repeat="chooseShop in chooseShops">
+                      <a href="#/home" class="list-group-item shopItem" ng-click="get_store_fromtype(chooseShop.type)">
+                        
+                        <div class="address product_title" >
+                            <h4 id="selected_StoreName">{{chooseShop.type}}</h4>
+                        </div> 
+                        <div class="pull-right order">
+                           <span class="price"><i class="fa fa-chevron-right"></i> </span>
+                        </div>
+                      </a>
+                     </div>
+                   
+                            
+            </div><!-- List group end -->
+     	</div><!-- Tab end -->
+
+  </div>
+</div>
+ 
+

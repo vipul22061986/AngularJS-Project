@@ -1,0 +1,23 @@
+
+
+
+/** Slide styles */
+.page img{
+	background:red;
+	
+}
+
+.page{
+	position:relative;
+	height:100%;
+	width:100%;
+}
+#pageWrapper {
+	background:black;
+    height: 100%;
+	width: 100%;
+	
+}
+
+
+

@@ -1,0 +1,117 @@
+#lightbulb {
+  font-size: 100px;
+  display: block;
+  text-align: center;
+}
+
+h1 {
+  padding: 0;
+  margin: 10px 0;
+}
+
+.chat-user-avatar {
+  font-size: 40px;
+  background: #ccc;
+  padding: 5px 10px;
+}
+
+.feature-icon {
+  font-size: 44px;
+  padding: 0;
+  line-height: 64px;
+  width: 64px;
+  text-align: center;
+  opacity: .8;
+}
+
+.app-content-loading {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  position: relative;
+}
+.loading-spinner {
+  position: absolute;
+  font-size: 50px;
+  left: 50%;
+  top: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+}
+.carousel-example-content {
+   font-size: 16px;
+    line-height: 25px;
+    margin-top: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+	background: none repeat scroll 0 0 #fff;
+	border: none;
+	margin: 10px;
+    padding-bottom: 10px;
+}
+.carousel .item {
+  color: #444;
+  background: #fff;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
+.carousel {
+  padding: 0;
+  overflow: visible;
+}
+.carousel-inner {
+  position: relative;
+  overflow: visible;
+	margin:0;
+}
+.carousel-inner>.item {
+    box-shadow: none;
+    display: block;
+    height: auto;
+    left: 0;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    width: 94%;
+	margin: 55px 0 0;
+}
+
+.carousel-inner>.item:first-child {
+  z-index: 1998; 
+}
+
+.carousel-inner>.item.active {
+  z-index: 2000;
+}
+
+.carousel-inner>.item.active + .item {
+  z-index: 1999;
+}
+
+.navbar.navbar-app.navbar-absolute-bottom.app_footer.ng-scope {
+    height: 50px;
+}
+.product_item_details .product_order_type.product_info {float: right;margin-right: 15px;width: 60px;margin-top:0px;}
+.sidebar-toggle.menu{padding:0 !important;}
+.sidebar-toggle.menu a{width:50px;display:block;}
+i.fa.fa-minus-circle.clear_order{margin-left:6px;color:red;}
+.additembutton{position: absolute;
+left: 10px;
+display: block;
+padding:9px 15px !important;
+top:9px;
+font-size:17px;}
+.add_to_favourites.icon,.cancell_order.icon{
+display: block;
+padding:7px 12px !important;
+font-size:17px;
+top:9px;
+}
+.loyaltyh4{margin-top: 10px !important;margin-bottom: 10px !important;line-height: 25px !important;}
+.overlay-dismiss .fa-times-circle-o{display:none;}
+
+.app_header .btn.btn-navbar i{padding-top:7px !important;height:50px !important;}
+
+.searchbutton{display: inline-block;width: 75px;height: 35px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background-color: #ff6624;color: #FFF;float:left;line-height: 35px;}
+.searchbutton:hover,.searchbutton:active{color:#FFF !important;}

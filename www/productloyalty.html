@@ -1,0 +1,42 @@
+  <div class="navbar navbar-app navbar-absolute-top app_header">
+        <div class="navbar-brand navbar-brand-center app_title" >
+          <span>Remote app</span>
+        </div>
+        <div class="btn-group pull-left">
+          <div class="btn btn-navbar sidebar-toggle menu">
+            <a href="#/offers"><i class="fa fa-angle-left back"></i></a> 
+          </div>
+        </div>
+        
+        <div class="btn-group pull-right" >
+              <div class="btn btn-navbar settings">
+                <i class="fa fa-gear"></i> 
+              </div>
+        </div>
+ </div>
+<div class="scrollable loyaltyproduct">
+  <div class=""  ng-controller="LoyaltyProductController">
+        <div class="product_image">
+            <img src="http://202.59.96.95/img/products-images/{{loyalty[0].Product.image_path}}">
+            <!-- </br><span class="product_quantity">5 {{product.Product.name}}</span> -->
+        </div>
+        <div class="product_item_details">	
+            <div class="offers">{{loyalty[0].Product.name}}</div>
+            <span class="product_price"> ${{loyalty[0].Product.price}} AUD</span>
+            <span ng-if="loyalty[0].Product.has_option==0" class="product_order_type"><a href="#/preview_order" ng-click="cart_id(loyalty[0].Product.id);">Pre-Order</a></span>
+            <span ng-if="loyalty[0].Product.has_option==1" class="product_order_type"><a href="#/product_details" ng-click="detail_cart(loyalty[0].Product.id);">Pre-Order</a></span>
+            <span class="product_order_type product_info"><a ng-click="product_info(loyalty[0].Product.id);">Info</a></span>
+        </div>
+
+	</div>
+</div>
+<div class="navbar navbar-app navbar-absolute-bottom app_footer">
+        <div class="btn-group justified">
+         <a href="#/special_products" class="btn btn-navbar special"><img src="images/special.png"/> <div class="text_footer">Special</div></a>
+          <a href="#/available_loyalty" class="btn btn-navbar loyalty"><img src="images/loyalty.png"/><div class="text_footer">Loyalty</div></a>
+          <a href="#" class="btn btn-navbar events"><img src="images/events.png"/><div class="text_footer">Events</div></a>
+          <a href="#" class="btn btn-navbar map"><img src="images/map.png"/> <div class="text_footer">Map</div></a>
+          <a href="#" class="btn btn-navbar call"><img src="images/call.png"/><div class="text_footer">Call</div></a>
+          
+        </div>
+      </div>

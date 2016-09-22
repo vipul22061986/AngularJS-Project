@@ -1,0 +1,44 @@
+
+<div class="navbar navbar-app navbar-absolute-top app_header">
+        <div class="navbar-brand navbar-brand-center app_title" >
+          <span>Available Loyalty</span>
+        </div>
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle menu">
+                <a><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+        
+        <div class="btn-group pull-right" >
+              <div class="btn btn-navbar settings">
+                <i class="fa fa-gear"></i> 
+              </div>
+        </div>
+ </div>
+<div class="scrollable whitebg" ng-controller="loyaltyController">
+  <div  class="scrollable-content whitebg">
+	<div ng-if="loyaltytype==2" class="avail_loyalty">
+        <div class="content home_btns available_loyalty">
+            <a href="#/get_points" ng-if="isgeneral==1"  class="btn find_store btn-primary qr_code get_point"  ng-click=""> Get Point on every Product</a>
+            <a href="#/offers" ng-if="isproduct==1" class="btn find_store btn-primary qr_code buy_products"  ng-click=""> Buy More Products and one Free</a>
+        </div>
+    </div>
+    <div ng-if="loyaltytype==1" class="container-fluid section ">
+        <div class="tab-content loyalty_msg">
+            <p> No Loyalty Offer </p>
+            <p> in this store at this time</p>
+        </div>
+    </div>
+  </div>
+</div>
+
+ <div class="navbar navbar-app navbar-absolute-bottom app_footer">
+        <div class="btn-group justified">
+         <a href="#/special_products" class="btn btn-navbar special"><img src="images/special.png"/> <div class="text_footer">Special</div></a>
+          <a href="#/available_loyalty" class="btn btn-navbar loyalty activefooter"><img src="images/loyalty.png"/><div class="text_footer">Loyalty</div></a>
+          <a href="#" class="btn btn-navbar events"><img src="images/events.png"/><div class="text_footer">Events</div></a>
+          <a href="#" class="btn btn-navbar map"><img src="images/map.png"/> <div class="text_footer">Map</div></a>
+          <a href="#" class="btn btn-navbar call"><img src="images/call.png"/><div class="text_footer">Call</div></a>
+          
+        </div>
+      </div>

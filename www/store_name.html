@@ -1,0 +1,52 @@
+   <div class="navbar navbar-app navbar-absolute-top app_header">
+        <div class="navbar-brand navbar-brand-center app_title" >
+          <span>Remote Stores</span>
+        </div>
+        <div class="btn-group pull-left">
+          <div class="btn btn-navbar sidebar-toggle menu">
+            <a href="#"><i class="fa fa-angle-left back"></i></a> 
+          </div>
+        </div>
+        
+        <div class="btn-group pull-right" >
+              <div class="btn btn-navbar settings">
+                <i class="fa fa-gear"></i> 
+              </div>
+        </div>
+ </div>
+ <div class="scrollable ">
+ <div class="scrollable-content container-fluid section gray">
+	  
+   
+      <div class="tab-content remote_stores">
+        <div class="tab-pane" 
+            toggleable 
+            active-class="active" 
+            default="active" 
+            id="Tab1" 
+            exclusion-group="myTabs" ng-controller="StoreController">
+				
+                
+                      <div class="list-group list_group_products" toggle="off" bubble target="mainSidebar" id="list_stores" ng-repeat="entry in entries.data">
+                      <a class="list-group-item" href="#/category_name" ng-click="get_category(entry.name)">
+                        <div class="pull-left">
+                            <img src="http://202.59.96.95/img/stores/{{entry.image}}">
+                        </div>
+                        <div class="address product_title" >
+                            <h4 id="selected_StoreName">{{entry.name}}</h4>
+                             <p id="selected_AddressName">{{entry.address}}</p>
+                        </div> 
+                        <div class="pull-right order">
+                           <span class="price"><i class="fa fa-chevron-right"></i> </span>
+                        </div>
+                      </a>
+                     </div>
+                   
+                            
+            </div><!-- List group end -->
+     	</div><!-- Tab end -->
+
+  </div>
+</div>
+ 
+

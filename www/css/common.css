@@ -1,0 +1,100 @@
+* {
+ font-size: 100%;
+ font-family: Verdana;
+}
+
+
+.navigation-bar{
+	position:relative;
+	min-height:50px;
+	background:#3bb27a;
+	margin-top:5px;
+}
+
+.back-btn{
+	
+	color:black;
+	text-decoration:none;
+}
+
+.home-icon{
+	position:relative;
+	margin-left:45%;
+	margin-top:9px;
+}
+
+.dots{
+	position:absolute;
+	margin-top:12px;
+}
+
+.show-map{
+	
+    text-decoration: none;
+    background-color: #EEEEEE;
+	color:black;
+    padding: 2px 6px 2px 6px;
+	height:90px;
+	display:inline-block;
+	height:40px;
+	line-height:29px;
+    font-size: 100%;
+	width:110px;
+    border-bottom: 1px solid #3bb27a !important;
+	position:relative;
+	margin-top:10px;
+	margin-left:30%;
+}
+
+.show-map span{
+	position:absolute;
+	margin-left:7%;
+	margin-top:5%;
+}
+
+
+
+.show-map-icon{
+	margin-top:10px;
+	width:15px;
+	height:20px;
+}
+
+/* right align the s33r icon*/
+
+
+/* tab bar style **/
+
+#tabbar{
+	height:49px;
+	background:black;
+}
+#tabs{
+	
+	width:100%;
+}
+.tabitem{
+	text-align:center;
+	margin-top:0px;
+	
+}
+.tabitem a{
+	font-size:10px;
+    font-family: Verdana;
+	text-decoration:none;
+	color:white;
+}
+.tabtitle{
+	
+	margin-top:0px;
+	font:10%;
+}
+
+.tabitem-icon{
+	
+/*	width:10px;
+	height:10px;
+*/}
+
+
+

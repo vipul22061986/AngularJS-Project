@@ -1,0 +1,23 @@
+<div class="scrollable">  
+  <div class="scrollable-content">
+                        
+			<div id="carousel-example" class="carousel" ng-controller="ProductController" >
+				<div class="carousel-inner">
+					<div href="" class="carousel_item item active" carousel-example-item ng-repeat="product in products.data">
+						<div class="carousel-example-content">
+                            <div class="product_image">
+                                <img src="http://202.59.96.95/img/products-images/{{product.Product.image_path}}"> </br><span class="product_quantity">5 {{product.Product.name}}</span>	
+                            </div>
+                            <div class="product_item_details">	
+                                <div class="offers">Get 1 cup free </div>
+                                <span class="product_price">AUD {{product.Product.price}}</span>
+                                <span class="product_order_type">Pre-Order</span>
+                            </div>
+                        </div>
+                    </div> <!-- items end -->
+                    
+				</div>
+			</div>	<!-- carousel items end -->
+                            
+	</div>
+</div>

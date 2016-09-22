@@ -1,0 +1,26 @@
+  <div class="navbar navbar-app navbar-absolute-top app_header">
+        <div class="navbar-brand navbar-brand-center app_title" >
+          <span>Remote app</span>
+        </div>
+        <div class="btn-group pull-left">
+          <div class="btn btn-navbar sidebar-toggle menu">
+            <i class="fa fa-bars"></i> 
+          </div>
+        </div>
+        
+        <div class="btn-group pull-right" >
+              <div class="btn btn-navbar settings">
+                <i class="fa fa-gear"></i> 
+              </div>
+        </div>
+ </div>
+<div class="scrollable">  
+  <div class="scrollable-content">
+	    
+   	<div class="content home_btns">
+            <a  class="btn find_store btn-primary qr_code"  ng-click="getQR();"><i class="fa fa-search fa-qrcode"></i> Store QR Code</a>
+            <input id="suburb" class=" find_store btn-primary qr_code" type="text" placeholder="&#xF002; Add Suburb or Postcode">
+             <a id="go" class="btn find_store btn-primary qr_code" ng-click="search_go();" ng-controller="GO_Search" href="#/store_name">Go</a>
+    	</div>
+  </div>
+</div>
